@@ -1,19 +1,31 @@
 <template>
   <view class="main-content">
-    <LikeButton></LikeButton>
+    <FadeTransiton :show="show">
+      <view class="container"> 123 </view>
+    </FadeTransiton>
+    <button @click="change_show">click</button>
   </view>
 </template>
 
 <script setup>
-import LikeButton from "../../component/button/likeButton.vue";
+import { ref } from "vue";
+import FadeTransiton from "../../component/transiton/fadeTransiton.vue";
+const show = ref(false);
+const change_show = () => {
+  show.value = !show.value;
+};
 </script>
 
 <style lang="scss" scoped>
-  .main-content {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-content {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    width: 50px;
+    height: 50px;
+    border: 1px solid red;
   }
-
+}
 </style>

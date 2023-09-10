@@ -1,13 +1,19 @@
 {
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/share/share",
       "style": {
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/share/share",
+      "path": "pages/test/test",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/index/index",
       "style": {
         "navigationStyle": "custom"
       }
@@ -37,13 +43,6 @@
         "navigationStyle": "default"
       }
     },
-    {
-      "path": "pages/test/test",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-
     {
       "path": "pages/post/post",
       "style": {

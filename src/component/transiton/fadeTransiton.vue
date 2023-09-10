@@ -1,53 +1,5 @@
-<!-- <template>
-  <view
-    class="main-content"
-    :style="{
-      'animation-play-state': show ? 'running' : 'paused',
-      'animation-duration': duration,
-    }"
-  >
-    <slot></slot>
-  </view>
-</template>
-
-<script setup>
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false,
-  },
-  duration: {
-    type: String,
-    default: "0.5s",
-  },
-});
-</script>
-
-<style lang="scss" scoped>
-.main-content {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: fade forwards;
-}
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-</style> -->
-
 <template>
-  <view
-    class="main-content"
-    :style="{
-      'animation-play-state': play_anim ? 'running' : 'paused',
-      'animation-duration': props.duration,
-    }"
-  >
+  <view class="main-content" :animation="anim_data">
     <slot></slot>
   </view>
 </template>
@@ -66,16 +18,30 @@ const props = defineProps({
   },
 });
 
-const play_anim = ref(false);
 const anim_duration = ref(0);
+const anim_data = ref({});
 
 watch(
   () => props.show,
-  () => {
-    play_anim.value = true;
-    setTimeout(() => {
-      play_anim.value = false;
-    }, anim_duration.value / 2);
+  (newVal) => {
+    if (newVal) {
+      const animation = uni.createAnimation({
+        duration: anim_duration.value,
+        timingFunction: "ease",
+      });
+      animation.opacity(1).step();
+      anim_data.value = animation.export();
+    } else {
+      const animation = uni.createAnimation({
+        duration: anim_duration.value,
+        timingFunction: "ease",
+      });
+      animation.opacity(0).step();
+      anim_data.value = animation.export();
+    }
+  },
+  {
+    immediate: true,
   }
 );
 
@@ -89,17 +55,5 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   opacity: 0;
-  animation: fade infinite;
-}
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }
 </style>
