@@ -12,6 +12,7 @@
         "navigationStyle": "custom"
       }
     },
+
     {
       "path": "pages/index/index",
       "style": {

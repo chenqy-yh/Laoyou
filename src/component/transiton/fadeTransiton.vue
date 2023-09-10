@@ -1,5 +1,13 @@
 <template>
-  <view class="main-content" :animation="anim_data">
+  <view
+    class="main-content"
+    :animation="anim_data"
+    :style="{
+      position: props.position,
+      width: props.width,
+      height: props.height,
+    }"
+  >
     <slot></slot>
   </view>
 </template>
@@ -15,6 +23,18 @@ const props = defineProps({
   duration: {
     type: String,
     default: "0.6s",
+  },
+  position: {
+    type: String,
+    default: "static",
+  },
+  width: {
+    type: String,
+    default: "100%",
+  },
+  height: {
+    type: String,
+    default: "100%",
   },
 });
 
@@ -52,8 +72,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .main-content {
-  width: 100%;
-  height: 100%;
   opacity: 0;
 }
 </style>

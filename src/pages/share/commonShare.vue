@@ -86,7 +86,6 @@ onReady(() => {
   menu_button_pos.value.height = res.height;
   menu_button_pos.value.left = res.left;
   menu_button_pos.value.width = res.width;
-  uni.hideTabBar();
 });
 
 onHide(() => {
@@ -138,7 +137,7 @@ const back = () => {
 
 <style lang="scss" scoped>
 .main-content {
-  height: 84vh;
+  height: 100%;
   padding-inline: 10px;
   box-sizing: border-box;
   border-bottom-left-radius: 20px;
