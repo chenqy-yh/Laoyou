@@ -1,0 +1,89 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/share/share",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/function/function",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/health/health",
+      "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/weather/weather",
+      "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/learn/learn",
+      "style": {
+        "navigationStyle": "default"
+      }
+    },
+    {
+      "path": "pages/test/test",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/post/post",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "tui-(.*)": "thorui-uni/lib/thorui/tui-$1/tui-$1.vue"
+    }
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#ffffff",
+
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./static/icon/home.png",
+        "selectedIconPath": "./static/icon/home_selected.png"
+      },
+      {
+        "pagePath": "pages/share/share",
+        "iconPath": "/static/icon/share.png",
+        "selectedIconPath": "/static/icon/share.png"
+      },
+      {
+        "pagePath": "pages/function/function",
+        "iconPath": "./static/icon/function.png",
+        "selectedIconPath": "./static/icon/function_selected.png"
+      }
+    ]
+  }
+}
