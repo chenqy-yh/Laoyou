@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from "vue";
+import { computed, ref } from "vue";
 import CommentDetail from "./commentDetail.vue";
 import LikeButton from "../button/likeButton.vue";
 const props = defineProps({
@@ -53,9 +53,6 @@ const format_like_count = computed(() => {
   return formatNumber(props.comments.like);
 });
 
-onMounted(() => {
-  // console.log("comments: ", props.comments);
-});
 
 const formatNumber = () => {
   const like = props.comments.like;

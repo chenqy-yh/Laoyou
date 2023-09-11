@@ -40,7 +40,6 @@ const sub_comment = () => {
 
 onReady(() => {
   uni.$on("closeCommentBox", () => {
-    // console.log("closeCommentBox");
     const animation = uni.createAnimation({
       duration: 250,
       timingFunction: "ease",

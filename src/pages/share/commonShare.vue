@@ -3,6 +3,7 @@
     class="main-content"
     :style="{
       'padding-top': menu_button_pos.top + 'px',
+      height: props.height,
     }"
   >
     <view
@@ -64,10 +65,20 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits, computed } from "vue";
 import { onReady, onHide } from "@dcloudio/uni-app";
 import SmallButton from "../../component/button/smallButton.vue";
 import LazyImg from "../../component/lazyImg/lazyImg.vue";
+
+const props = defineProps({
+  height: {
+    type: String,
+    default: "100%",
+  },
+});
+
+const component_name = "CommonShare";
+
 const menu_button_pos = ref({
   height: 0,
   top: 0,
@@ -80,13 +91,52 @@ const share_title = ref("");
 const share_content = ref("");
 const imgBlock_anim_data = ref([]);
 
+const share_is_empty = computed(() => {
+  return (
+    pic_list.value.length === 0 &&
+    share_title.value === "" &&
+    share_content.value === ""
+  );
+});
+
 onReady(() => {
+  // 获取胶囊位置
+  get_menu_button_pos();
+
+  // 监听 页面是否为空
+  listen_share_is_empty();
+
+  // 监听 清空数据
+  listen_clean_share_data();
+});
+
+// 获取胶囊位置
+const get_menu_button_pos = () => {
   const res = uni.getMenuButtonBoundingClientRect();
   menu_button_pos.value.top = res.top;
   menu_button_pos.value.height = res.height;
   menu_button_pos.value.left = res.left;
   menu_button_pos.value.width = res.width;
-});
+};
+
+const listen_share_is_empty = () => {
+  uni.$on("share_is_empty", (res) => {
+    if (res === component_name) {
+      uni.$emit("share_data_empty", {
+        is_empty: share_is_empty.value,
+        component: component_name,
+      });
+    }
+  });
+};
+//监听 清空数据
+const listen_clean_share_data = () => {
+  uni.$on("clean_share_data", (res) => {
+    if (res === component_name) {
+      clear_data();
+    }
+  });
+};
 
 onHide(() => {
   // clear data
@@ -99,7 +149,7 @@ onHide(() => {
 //function
 
 const add_pic = () => {
-  console.log("add_pic");
+  ("add_pic");
   pic_list.value.push({
     id: pic_id.value++,
     url: "https://images.unsplash.com/photo-1682687982360-3fbab65f9d50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=600&q=60",
@@ -125,20 +175,27 @@ const del_pic = (id) => {
     pic_list.value = pic_list.value.filter((item) => item.id !== id);
     imgBlock_anim_data.value = [];
   }, 500);
-  console.log(imgBlock_anim_data.value);
 };
 
+//回到主页
 const back = () => {
   uni.switchTab({
     url: "/pages/index/index",
   });
 };
+
+//清空数据
+const clear_data = () => {
+  pic_list.value = [];
+  pic_id.value = 0;
+  share_title.value = "";
+  share_content.value = "";
+};
 </script>
 
 <style lang="scss" scoped>
 .main-content {
-  height: 100%;
-  padding-inline: 10px;
+  padding-inline: 20px;
   box-sizing: border-box;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;

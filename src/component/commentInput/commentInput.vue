@@ -58,7 +58,6 @@ let comments = ref("");
 
 const onInput = (e) => {
   wordCount.value = e.detail.value.length;
-  console.log("wordCount: ", wordCount.value);
   if (wordCount.value < START_CHANGE_WORD_COUNT) {
     height.value = LINE_HEIGHT.value;
   } else if (

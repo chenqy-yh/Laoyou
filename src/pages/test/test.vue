@@ -1,59 +1,28 @@
 <template>
   <view class="main-content">
-    <FadeTransiton
-      :show="show"
-      position="absolute"
-      width="max-content"
-      height="max-content"
-    >
-      <view class="container div1">1 </view>
-    </FadeTransiton>
-    <FadeTransiton
-      :show="!show"
-      position="absolute"
-      width="max-content"
-      height="max-content"
-    >
-      <view class="container div2"> 2 </view>
-    </FadeTransiton>
-    <button @click="click">click</button>
+    <view class="demo1">
+      <view> 父组件的值:{{ val }} </view>
+      <Son v-model:val="val"></Son>
+    </view>
+
+    <view class="demo2">
+      <view> 空值:{{ is_empty }} </view>
+      <Son2 v-model:is_empty="is_empty"></Son2>
+    </view>
   </view>
 </template>
 
 <script setup>
-import FadeTransiton from "../../component/transiton/fadeTransiton.vue";
+import Son from "./son.vue";
 import { ref } from "vue";
-
-const show = ref(false);
-const click = () => {
-  show.value = !show.value;
-};
+import Son2 from "./son2.vue";
+const val = ref(10);
+const is_empty = ref(true);
 </script>
 
 <style lang="scss" scoped>
-.div1 {
-  background-color: red;
-}
-.div2 {
-  background-color: blue;
-}
 .main-content {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border: 1px solid red;
-
-  button {
-    margin: 0;
-    padding: 0;
-  }
-
-  .container {
-    width: 100px;
-    height: 100px;
-    border: 1px solid red;
-  }
+  padding-top: 100px;
+  padding-left: 100px;
 }
 </style>

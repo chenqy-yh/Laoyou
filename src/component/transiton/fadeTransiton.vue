@@ -36,6 +36,10 @@ const props = defineProps({
     type: String,
     default: "100%",
   },
+  timingFunction: {
+    type: String,
+    default: "ease",
+  },
 });
 
 const anim_duration = ref(0);
@@ -47,14 +51,14 @@ watch(
     if (newVal) {
       const animation = uni.createAnimation({
         duration: anim_duration.value,
-        timingFunction: "ease",
+        timingFunction: props.timingFunction,
       });
       animation.opacity(1).step();
       anim_data.value = animation.export();
     } else {
       const animation = uni.createAnimation({
         duration: anim_duration.value,
-        timingFunction: "ease",
+        timingFunction: props.timingFunction,
       });
       animation.opacity(0).step();
       anim_data.value = animation.export();
